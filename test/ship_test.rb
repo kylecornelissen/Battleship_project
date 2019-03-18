@@ -18,8 +18,8 @@ class ShipTest < Minitest::Test
     assert_equal 3, @cruiser.length
   end
 
-  def test_
-
+  def test_health_method
+    assert_equal 3, @cruiser.health
   end
 
 end
