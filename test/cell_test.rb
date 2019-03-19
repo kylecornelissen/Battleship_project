@@ -9,7 +9,7 @@ class CellTest < Minitest::Test
   def setup
     @cell = Cell.new("B4")
     @cruiser = Ship.new("Cruiser", 3)
-
+    @cell_1 = Cell.new("B4")
   end
 
   def test_if_cell_exists
@@ -47,8 +47,12 @@ class CellTest < Minitest::Test
   end
 
   def test_render_empty_cell_returns_dot
-    cell_1 = Cell.new("B4")
-    assert_equal ".", cell_1.render
+    assert_equal ".", @cell_1.render
+  end
+
+  def test_render_empty_cell_with_hit_returns_m
+    @cell_1.fire_upon
+    assert_equal "M", @cell_1.render
   end
 
 
