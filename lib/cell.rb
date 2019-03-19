@@ -36,7 +36,7 @@ class Cell
     if @fired_upon == false && @ship == nil
       "."
     elsif @fired_upon == false && @ship != nil
-        "S"
+      "S"
     elsif @fired_upon == true && @ship == nil
       "M"
     elsif @fired_upon == true && @ship != nil

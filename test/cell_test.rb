@@ -68,6 +68,14 @@ class CellTest < Minitest::Test
     assert_equal "H", @cell_2.render
   end
 
+  def test_less_than_three_hits_doesnt_sink_ship
+    @cell_2.place_ship(@cruiser)
+    @cell_2.fire_upon
+    assert_equal false, @cruiser.sunk?
+  end
+
+
+
 
 
 end
