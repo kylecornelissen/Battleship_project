@@ -62,6 +62,12 @@ class CellTest < Minitest::Test
     assert_equal "S", @cell_2.render(true)
   end
 
+  def test_render_returns_H_when_ship_is_hit
+    @cell_2.place_ship(@cruiser)
+    @cell_2.fire_upon
+    assert_equal "H", @cell_2.render
+  end
+
 
 
 end
