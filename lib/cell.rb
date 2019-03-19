@@ -7,6 +7,12 @@ class Cell
     @empty = true
   end
 
+  def ship
+    if @empty = true
+      nil
+    end
+  end
+
   def empty?
     @empty
   end
