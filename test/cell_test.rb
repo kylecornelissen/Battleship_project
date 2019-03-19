@@ -5,9 +5,22 @@ require './lib/ship'
 require 'pry'
 
 class CellTest < Minitest::Test
-  def test_if_cell_exists
-    cell = Cell.new("B4")
 
-    assert_instance_of Cell, cell
+  def setup
+    @cell = Cell.new("B4")
+  end
+
+  def test_if_cell_exists
+
+
+    assert_instance_of Cell, @cell
+  end
+
+  def test_if_cell_coordinate_can_be_accessed
+    assert_equal "B4", @cell.coordinate
+  end
+
+  def test_if_cell_default_empty
+    assert @cell.empty?
   end
 end
