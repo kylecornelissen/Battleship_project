@@ -29,4 +29,13 @@ class Cell
     @fired_upon = true
     @ship.hit
   end
+
+  def render
+    if @fired_upon == false
+      "."
+    end
+
+  end
+
+
 end
