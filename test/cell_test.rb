@@ -26,10 +26,12 @@ class CellTest < Minitest::Test
   end
 
   def test_if_cell_default_empty
-    assert @cell.empty?
+    skip
+    assert_equal true, @cell.empty?
   end
 
   def test_place_ship_occupies_coordinate
+    skip
     @cell.place_ship(@cruiser)
 
     assert_equal @cruiser, @cell.ship
