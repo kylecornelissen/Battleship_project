@@ -12,8 +12,6 @@ class CellTest < Minitest::Test
   end
 
   def test_if_cell_exists
-
-
     assert_instance_of Cell, @cell
   end
 
@@ -26,17 +24,26 @@ class CellTest < Minitest::Test
   end
 
   def test_if_cell_default_empty
-
     assert_equal true, @cell.empty?
   end
 
   def test_place_ship_occupies_coordinate
-
     @cell.place_ship(@cruiser)
 
     assert_equal @cruiser, @cell.ship
     assert_equal false, @cell.empty?
   end
 
-  
+  def test_fired_upon_returns_false
+    assert_equal false, @cell.fired_upon?
+  end
+
+  def test_fired_upon_changes_ships_health
+    @cell.place_ship(@cruiser)
+    @cell.fire_upon
+    assert_equal 2, @cell.ship.health
+    assert_equal true, @cell.fired_upon?
+  end
+
+
 end
