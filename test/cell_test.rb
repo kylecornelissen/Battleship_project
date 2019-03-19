@@ -71,10 +71,16 @@ class CellTest < Minitest::Test
   def test_less_than_three_hits_doesnt_sink_ship
     @cell_2.place_ship(@cruiser)
     @cell_2.fire_upon
-    assert_equal false, @cruiser.sunk?
+    refute @cruiser.sunk?
   end
 
-
+  def test_three_hits_sinks_ship
+    @cell_2.place_ship(@cruiser)
+    @cell_2.fire_upon
+    @cruiser.hit
+    @cruiser.hit
+    assert @cruiser.sunk?
+  end
 
 
 
