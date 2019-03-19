@@ -21,7 +21,7 @@ class CellTest < Minitest::Test
   end
 
   def test_cell_begins_with_no_ship
-    assert_nil
+    assert_nil @cell.ship
   end
 
   def test_if_cell_default_empty
