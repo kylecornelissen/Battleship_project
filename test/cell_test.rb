@@ -10,6 +10,7 @@ class CellTest < Minitest::Test
     @cell = Cell.new("B4")
     @cruiser = Ship.new("Cruiser", 3)
     @cell_1 = Cell.new("B4")
+    @cell_2 = Cell.new("C3")
   end
 
   def test_if_cell_exists
@@ -53,6 +54,12 @@ class CellTest < Minitest::Test
   def test_render_empty_cell_with_hit_returns_m
     @cell_1.fire_upon
     assert_equal "M", @cell_1.render
+  end
+
+  def test_render_returns_S_when_ship_present
+    assert_equal ".", @cell_2.render
+    @cell_2.place_ship(@cruiser)
+    assert_equal "S", @cell_2.render(true)
   end
 
 
