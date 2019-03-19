@@ -26,4 +26,10 @@ class ShipTest < Minitest::Test
     refute @cruiser.sunk?
   end
 
+  def test_hit_takes_away_one_health_point
+    @cruiser.hit
+
+    assert_equal 2, @cruiser.health
+  end
+
 end
