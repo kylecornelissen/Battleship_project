@@ -16,4 +16,8 @@ class Cell
   def empty?
     @empty
   end
+
+  # def place_ship(ship)
+  #   @empty = false
+  # end
 end
