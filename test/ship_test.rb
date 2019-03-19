@@ -42,7 +42,4 @@ class ShipTest < Minitest::Test
     @cruiser.hit
     assert @cruiser.sunk?
   end
-
-
-
 end
