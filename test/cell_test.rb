@@ -31,9 +31,12 @@ class CellTest < Minitest::Test
   end
 
   def test_place_ship_occupies_coordinate
-    
+
     @cell.place_ship(@cruiser)
 
     assert_equal @cruiser, @cell.ship
+    assert_equal false, @cell.empty?
   end
+
+  
 end
