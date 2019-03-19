@@ -82,6 +82,15 @@ class CellTest < Minitest::Test
     assert @cruiser.sunk?
   end
 
+  def test_three_hits_renders_X_on_sunk_coordinates
+    @cell_2.place_ship(@cruiser)
+    @cell_2.fire_upon
+    @cruiser.hit
+    @cruiser.hit
+    assert @cruiser.sunk?
+    assert_equal "X", @cell_2.render
+  end
+
 
 
 end

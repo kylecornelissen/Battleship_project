@@ -39,8 +39,10 @@ class Cell
       "S"
     elsif @fired_upon == true && @ship == nil
       "M"
-    elsif @fired_upon == true && @ship != nil
+    elsif @fired_upon == true && @ship != nil && @ship.sunk? != true
       "H"
+    else 
+      "X"
     end
 
   end
