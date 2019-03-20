@@ -37,21 +37,37 @@ class BoardTest < Minitest::Test
   end
 
   def test_if_method_splits_coordinates
+    skip
     assert_equal ["A", "1", "A", "2"], @board.split_coordinates("A1", "A2")
   end
 
   def test_if_letters_can_be_stored_in_letters_array
+    skip
     assert_equal ["A", "A"], @board.store_letters("A", "1", "A", "2")
     assert_equal ["B", "C", "D"], @board.store_letters("B", "1", "C", "1", "D", "1")
   end
 
   def test_if_numbers_can_be_stored_in_numbers_array
-    assert_equal ["1", "2"], @board.store_numbers("A", "1", "A", "2")
-    assert_equal ["1", "1", "1"], @board.store_numbers("B", "1", "C", "1", "D", "1")
+
+    assert_equal [1, 2], @board.store_numbers("A", "1", "A", "2")
+    assert_equal [1, 1, 1], @board.store_numbers("B", "1", "C", "1", "D", "1")
   end
 
   def test_if_letters_can_be_converted_to_ordinals
+    skip
     assert_equal [65, 65], @board.letters_to_ordinals("A", "A")
+  end
+
+  def test_if_method_detects_consecutive_letters
+    refute @board.consecutive_letters?(65, 65)
+    assert @board.consecutive_letters?(65, 66, 67)
+    refute @board.consecutive_letters?(67, 65)
+  end
+
+  def test_if_method_detects_consecutive_numbers
+    assert @board.consecutive_numbers?(1, 2)
+    refute @board.consecutive_numbers?(1, 1, 1)
+    refute @board.consecutive_numbers?(3, 1)
   end
 
   def test_if_placement_of_ship_has_consecutive_coordinates

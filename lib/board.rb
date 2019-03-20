@@ -29,15 +29,12 @@ class Board
   def valid_coordinate?(coordinate)
     @cells.include?(coordinate)
   end
-# split coordinates to make two separate arrays
-# on the letter coordinates we need to turn them into ordinals
-# check to make sure ordinals and numbers are either the same or in order
-  def valid_placement?(ship, coordinates)
 
-    if ship.length != coordinates.length
-      false
-    else
+  def valid_placement?(ship, coordinates)
+    if ship.length == coordinates.length &&
       true
+    else
+      false
     end
   end
 
@@ -58,7 +55,7 @@ class Board
   def store_numbers(*split_coordinates)
     split_coordinates.map.with_index do |num, index|
       if index % 2 != 0
-        num
+        num.to_i
       end
     end.compact
   end
@@ -69,6 +66,15 @@ class Board
     end
   end
 
+  def consecutive_letters?(*letters_to_ordinals)
+    letters_to_ordinals.each_cons(2).any? do |x,y|
+      y == x + 1
+    end
+  end
 
-
+  def consecutive_numbers?(*store_numbers)
+    store_numbers.each_cons(2).any? do |x,y|
+      y == x + 1
+    end
+  end
 end
