@@ -29,7 +29,9 @@ class Board
   def valid_coordinate?(coordinate)
     @cells.include?(coordinate)
   end
-
+# split coordinates to make two separate arrays
+# on the letter coordinates we need to turn them into ordinals
+# check to make sure ordinals and numbers are either the same or in order
   def valid_placement?(ship, coordinates)
     if ship.length != coordinates.length
       false
