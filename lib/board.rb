@@ -33,11 +33,18 @@ class Board
 # on the letter coordinates we need to turn them into ordinals
 # check to make sure ordinals and numbers are either the same or in order
   def valid_placement?(ship, coordinates)
+
     if ship.length != coordinates.length
       false
     else
       true
     end
+  end
+
+  def split_coordinates(*coordinates)
+    coordinates.map do |coordinate|
+      coordinate.split(//)
+    end.flatten
   end
 
 end
