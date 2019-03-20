@@ -40,6 +40,10 @@ class BoardTest < Minitest::Test
     assert_equal ["A", "1", "A", "2"], @board.split_coordinates("A1", "A2")
   end
 
+  def test_if_letters_can_be_stored_in_letters_array
+    assert_equal ["A", "A"], @board.store_letters("A", "1", "A", "2")
+  end
+
   def test_if_placement_of_ship_has_consecutive_coordinates
     skip
     refute @board.valid_placement?(@cruiser, ["A1", "A2", "A4"])

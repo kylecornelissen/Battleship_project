@@ -47,4 +47,18 @@ class Board
     end.flatten
   end
 
+  def store_letters(*split_coordinates)
+    split_coordinates.map.with_index do |char, index|
+      if index == 0 || index % 2 == 0
+        char
+      end
+
+    end.compact
+
+  end
+
+
+
+
+
 end
