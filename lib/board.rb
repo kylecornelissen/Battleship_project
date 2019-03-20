@@ -52,12 +52,22 @@ class Board
       if index == 0 || index % 2 == 0
         char
       end
-
     end.compact
-
   end
 
+  def store_numbers(*split_coordinates)
+    split_coordinates.map.with_index do |num, index|
+      if index % 2 != 0
+        num
+      end
+    end.compact
+  end
 
+  def letters_to_ordinals(*store_letters)
+    store_letters.map do |letter|
+      letter.ord
+    end
+  end
 
 
 
