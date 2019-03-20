@@ -31,10 +31,19 @@ class Board
   end
 
   def valid_placement?(ship, coordinates)
-    if ship.length == coordinates.length &&
-      true
+    split_coordinates = split_coordinates(*coordinates)
+    store_letters = store_letters(*split_coordinates)
+    store_numbers = store_numbers(*split_coordinates)
+    letters_to_ordinals = letters_to_ordinals(*store_letters)
+    consecutive_letters = consecutive_letters?(*letters_to_ordinals)
+    consecutive_numbers = consecutive_numbers?(*store_numbers)
+
+    if consecutive_letters == true && consecutive_numbers == false && ship.length == coordinates.length
+        true
+    elsif consecutive_letters == false && consecutive_numbers == true && ship.length == coordinates.length
+        true
     else
-      false
+        false
     end
   end
 
@@ -67,14 +76,19 @@ class Board
   end
 
   def consecutive_letters?(*letters_to_ordinals)
-    letters_to_ordinals.each_cons(2).any? do |x,y|
+    letters_to_ordinals.each_cons(2).all? do |x,y|
       y == x + 1
     end
   end
 
   def consecutive_numbers?(*store_numbers)
-    store_numbers.each_cons(2).any? do |x,y|
-      y == x + 1
+    store_numbers.each_cons(2).all? do |a,b|
+      b == a + 1
     end
   end
+
+  # def diagonal?(*
+  #
+  # end
+
 end
