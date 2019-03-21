@@ -32,7 +32,6 @@ class ShipTest < Minitest::Test
 
     @cruiser.hit
     assert_equal 1, @cruiser.health
-
     refute @cruiser.sunk?
   end
 
