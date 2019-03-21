@@ -2,11 +2,7 @@ class Board
   attr_reader :cells
 
   def initialize
-    @cells = create_cells
-  end
-
-  def create_cells
-    ({
+    @cells = {
       "A1" => Cell.new("A1"),
       "A2" => Cell.new("A2"),
       "A3" => Cell.new("A3"),
@@ -23,7 +19,7 @@ class Board
       "D2" => Cell.new("D2"),
       "D3" => Cell.new("D3"),
       "D4" => Cell.new("D4")
-    })
+    }
   end
 
   def valid_coordinate?(coordinate)
@@ -87,8 +83,12 @@ class Board
     end
   end
 
-  # def diagonal?(*
-  #
-  # end
+  def place(ship, coordinates)
+    coordinates.each do |coordinate|
+      @cells[coordinate].place_ship(ship)
+    end
+  end
+
+
 
 end
