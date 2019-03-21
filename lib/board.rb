@@ -34,6 +34,7 @@ class Board
     consecutive_letters = consecutive_letters?(*letters_to_ordinals)
     consecutive_numbers = consecutive_numbers?(*store_numbers)
 
+
     if consecutive_letters == true && consecutive_numbers == false && ship.length == coordinates.length
         true
     elsif consecutive_letters == false && consecutive_numbers == true && ship.length == coordinates.length
@@ -88,6 +89,8 @@ class Board
       @cells[coordinate].place_ship(ship)
     end
   end
+
+
 
 
 
