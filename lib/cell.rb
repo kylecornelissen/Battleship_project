@@ -32,7 +32,7 @@ class Cell
       end
   end
 
-  def render(reveal = false)
+  def render(reveal = falseg)
     if @fired_upon == false && @ship == nil
       "."
     elsif @fired_upon == false && @ship != nil && reveal
