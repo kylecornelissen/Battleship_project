@@ -18,7 +18,7 @@ class BoardTest < Minitest::Test
   end
 
   def test_if_the_board_creates_cells
-
+    assert_equal Hash, @board.cells.class
     assert_equal 16, @board.cells.length
   end
 
@@ -42,19 +42,16 @@ class BoardTest < Minitest::Test
   end
 
   def test_if_letters_can_be_stored_in_letters_array
-
     assert_equal ["A", "A"], @board.store_letters("A", "1", "A", "2")
     assert_equal ["B", "C", "D"], @board.store_letters("B", "1", "C", "1", "D", "1")
   end
 
   def test_if_numbers_can_be_stored_in_numbers_array
-
     assert_equal [1, 2], @board.store_numbers("A", "1", "A", "2")
     assert_equal [1, 1, 1], @board.store_numbers("B", "1", "C", "1", "D", "1")
   end
 
   def test_if_letters_can_be_converted_to_ordinals
-
     assert_equal [65, 65], @board.letters_to_ordinals("A", "A")
   end
 
@@ -71,7 +68,6 @@ class BoardTest < Minitest::Test
   end
 
   def test_if_placement_of_ship_has_consecutive_coordinates
-
     refute @board.valid_placement?(@cruiser, ["A1", "A2", "A4"])
     refute @board.valid_placement?(@submarine, ["A2", "C1"])
     refute @board.valid_placement?(@cruiser, ["A3", "A2", "A1"])
@@ -90,6 +86,16 @@ class BoardTest < Minitest::Test
   def test_if_placement_is_valid
     assert @board.valid_placement?(@submarine, ["A1", "A2"])
     assert @board.valid_placement?(@cruiser, ["B1", "C1", "D1"])
+  end
+
+  def test_place_method_return_ship_when_cells_called
+    @board.place(@cruiser, ["A1", "A2", "A3"])
+    @cell_1 = @board.cells["A1"]
+    @cell_2 = @board.cells["A2"]
+    @cell_3 = @board.cells["A3"]
+    assert_equal @cruiser, @cell_1.ship
+    assert_equal @cruiser, @cell_2.ship
+    assert_equal @cruiser, @cell_3.ship
   end
 
 end
