@@ -27,30 +27,30 @@ class Board
   end
 
   def valid_placement?(ship, coordinates)
-    split_coordinates = split_coordinates(*coordinates)
-    store_letters = store_letters(*split_coordinates)
-    store_numbers = store_numbers(*split_coordinates)
-    letters_to_ordinals = letters_to_ordinals(*store_letters)
-    consecutive_letters = consecutive_letters?(*letters_to_ordinals)
-    consecutive_numbers = consecutive_numbers?(*store_numbers)
+    split_coordinates = split_coordinates(coordinates)
+    store_letters = store_letters(split_coordinates)
+    store_numbers = store_numbers(split_coordinates)
+    letters_to_ordinals = letters_to_ordinals(store_letters)
+    consecutive_letters = consecutive_letters?(letters_to_ordinals)
+    consecutive_numbers = consecutive_numbers?(store_numbers)
 
 
-    if consecutive_letters == true && consecutive_numbers == false && ship.length == coordinates.length
+    if consecutive_letters && consecutive_numbers == false && (ship.length == coordinates.length) && overlapped?(coordinates)
         true
-    elsif consecutive_letters == false && consecutive_numbers == true && ship.length == coordinates.length
+    elsif consecutive_letters == false && consecutive_numbers && ship.length == coordinates.length && overlapped?(coordinates)
         true
     else
         false
     end
   end
 
-  def split_coordinates(*coordinates)
+  def split_coordinates(coordinates)
     coordinates.map do |coordinate|
       coordinate.split(//)
     end.flatten
   end
 
-  def store_letters(*split_coordinates)
+  def store_letters(split_coordinates)
     split_coordinates.map.with_index do |char, index|
       if index == 0 || index % 2 == 0
         char
@@ -58,7 +58,7 @@ class Board
     end.compact
   end
 
-  def store_numbers(*split_coordinates)
+  def store_numbers(split_coordinates)
     split_coordinates.map.with_index do |num, index|
       if index % 2 != 0
         num.to_i
@@ -66,19 +66,19 @@ class Board
     end.compact
   end
 
-  def letters_to_ordinals(*store_letters)
+  def letters_to_ordinals(store_letters)
     store_letters.map do |letter|
       letter.ord
     end
   end
 
-  def consecutive_letters?(*letters_to_ordinals)
+  def consecutive_letters?(letters_to_ordinals)
     letters_to_ordinals.each_cons(2).all? do |x,y|
       y == x + 1
     end
   end
 
-  def consecutive_numbers?(*store_numbers)
+  def consecutive_numbers?(store_numbers)
     store_numbers.each_cons(2).all? do |a,b|
       b == a + 1
     end
@@ -88,6 +88,13 @@ class Board
     coordinates.each do |coordinate|
       @cells[coordinate].place_ship(ship)
     end
+  end
+
+  def overlapped?(coordinates)
+    coordinates.all? do |coord|
+      @cells[coord].empty?
+    end
+
   end
 
 
