@@ -109,9 +109,8 @@ class BoardTest < Minitest::Test
     @board.place(@cruiser, ["A1", "A2", "A3"])
 
     expected = "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n"
-
     assert_equal expected, @board.render
-    binding.pry
+
     expected = "  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n"
     assert_equal expected, @board.render(true)
   end
