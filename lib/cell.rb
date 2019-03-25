@@ -32,7 +32,7 @@ class Cell
       end
   end
 
-  def render(reveal = falseg)
+  def render(reveal = false)
     if @fired_upon == false && @ship == nil
       "."
     elsif @fired_upon == false && @ship != nil && reveal
@@ -43,8 +43,8 @@ class Cell
       "M"
     elsif @fired_upon == true && @ship != nil && @ship.sunk? != true
       "H"
-    else
-      "X"
+    elsif @fired_upon == true && @ship != nil && @ship.sunk? == true
+      return "X"
     end
 
   end
