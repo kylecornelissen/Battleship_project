@@ -1,4 +1,4 @@
 require './lib'
 require 'pry'
 
-Game.start
+Game.welcome_message
