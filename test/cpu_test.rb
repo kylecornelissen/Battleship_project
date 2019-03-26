@@ -8,10 +8,10 @@ require './lib/cpu'
 require './lib/player'
 require 'pry'
 
-class CPUTest < Minitest::Test
+class CpuTest < Minitest::Test
 
   def setup
-    @cpu = CPU.new
+    @cpu = Cpu.new
     @game = Game.new
     @cpu_board = Board.new
     @player_board = Board.new
@@ -19,13 +19,13 @@ class CPUTest < Minitest::Test
   end
 
   def test_if_CPU_class_exists
-    assert_instance_of CPU, @cpu
+    assert_instance_of Cpu, @cpu
   end
 
   def test_computer_places_ship
 
-    @cpu.computer_place
-    
+    @cpu.cpu_place
+
     expected = "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n"
     assert_equal expected, @cpu.cpu_board.render
 
