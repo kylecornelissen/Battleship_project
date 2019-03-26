@@ -34,17 +34,17 @@ class Cell
 
   def render(reveal = false)
     if @fired_upon == false && @ship == nil
-      "."
+      "." # no ship, no fire upon
     elsif @fired_upon == false && @ship != nil && reveal
-      "S"
+      "S" # SHIP: ship, no fire upon, revealed
     elsif @fired_upon == false && @ship != nil && !reveal
-      "."
+      "." # ship, no fire upon, not revealed
     elsif @fired_upon == true && @ship == nil
-      "M"
+      "M" # MISSED: no ship, fired upon
     elsif @fired_upon == true && @ship != nil && @ship.sunk? != true
-      "H"
+      "H" # HIT: ship, fired upon
     elsif @fired_upon == true && @ship != nil && @ship.sunk? == true
-      "X"
+      "X" # SUNK ship fired upon
     end
 
   end

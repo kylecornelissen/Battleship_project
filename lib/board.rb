@@ -1,5 +1,7 @@
 class Board
-  attr_reader :cells
+  attr_reader :cells,
+              :valid_placement
+
 
   def initialize
     @cells = {
@@ -33,12 +35,18 @@ class Board
     letters_to_ordinals = letters_to_ordinals(store_letters)
     consecutive_letters = consecutive_letters?(letters_to_ordinals)
     consecutive_numbers = consecutive_numbers?(store_numbers)
+    same_letters = same_letters?(letters_to_ordinals)
+    same_numbers = same_numbers?(store_numbers)
 
 
-    if consecutive_letters && consecutive_numbers == false && (ship.length == coordinates.length) && overlapped?(coordinates)
+    if ship.length == coordinates.length && overlapped?(coordinates)
+      if (consecutive_letters == true) && (same_numbers == true)
         true
-    elsif consecutive_letters == false && consecutive_numbers && ship.length == coordinates.length && overlapped?(coordinates)
+      elsif (consecutive_numbers == true) && (same_letters == true)
         true
+      else
+        false
+      end
     else
         false
     end
@@ -78,9 +86,21 @@ class Board
     end
   end
 
+  def same_letters?(letters_to_ordinals)
+    letters_to_ordinals.each_cons(2).all? do |x,y|
+      x == y
+    end
+  end
+
   def consecutive_numbers?(store_numbers)
     store_numbers.each_cons(2).all? do |a,b|
       b == a + 1
+    end
+  end
+
+  def same_numbers?(store_numbers)
+    store_numbers.each_cons(2).all? do |a,b|
+      a == b
     end
   end
 
