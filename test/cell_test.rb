@@ -51,7 +51,7 @@ class CellTest < Minitest::Test
     assert_equal ".", @cell_1.render
   end
 
-  def test_render_empty_cell_with_hit_returns_m
+  def test_render_empty_cell_with_hit_returns_M
     @cell_1.fire_upon
     assert_equal "M", @cell_1.render
   end
