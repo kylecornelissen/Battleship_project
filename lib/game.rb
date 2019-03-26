@@ -1,11 +1,11 @@
-
-
 class Game
-  attr_reader :board,
-              :cruiser
+  attr_reader :cpu_board,
+              :ships
   def initialize
-    @board = Board.new
+    @cpu_board = Board.new
+    @player_board = Board.new
     @ships = [Ship.new("Submarine", 2), Ship.new("Cruiser", 3)]
+
   end
 
   def welcome_message
@@ -19,22 +19,32 @@ class Game
   end
 
   def computer_place
-    coordinates = []
+    coords = []
+
     @ships.each do |ship|
       loop do
-        coordinates = @board.cells.keys.sample(ship.length)
-
-          if @board.valid_placement?(ship, coordinates)
-            @board.place(ship, coordinates)
-            break
-          end
+        coords = @cpu_board.cells.keys.sample(ship.length)
+        if @cpu_board.valid_placement?(ship, coords)
+          @cpu_board.place(ship, coords)
+          break
+        end
       end
     end
-
-
-
+    
 
   end
+
+
+
+
+  def player_place
+    p "I have laid out my ships on the grid\nYou now need to lay out your two ships.\nThe Cruiser is three units long and the Submarine is two units long.\n"
+    p "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n"
+    p "Enter the squares for the Cruiser (3 spaces):\n> "
+
+  end
+
+
 
 
 end
