@@ -1,4 +1,4 @@
-class CPU
+class Cpu
   attr_reader :cpu_board,
               :player_board,
               :ships
@@ -8,7 +8,7 @@ class CPU
     @ships = [Ship.new("Submarine", 2), Ship.new("Cruiser", 3)]
   end
 
-  def computer_place
+  def cpu_place
     coords = []
 
     @ships.each do |ship|
@@ -19,6 +19,16 @@ class CPU
           break
         end
       end
+    end
+  end
+
+  def cpu_fires
+    loop do
+      dat_cell = @player_board.cells.values.sample
+        if dat_cell.fired_upon? == false
+          dat_cell.fire_upon
+          break
+        end
     end
   end
 
