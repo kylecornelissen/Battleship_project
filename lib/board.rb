@@ -1,6 +1,6 @@
+
 class Board
-  attr_reader :cells,
-              :valid_placement
+  attr_reader :cells
 
 
   def initialize
@@ -38,8 +38,8 @@ class Board
     same_letters = same_letters?(letters_to_ordinals)
     same_numbers = same_numbers?(store_numbers)
 
-
-    if ship.length == coordinates.length && overlapped?(coordinates)
+    #binding.pry
+    if ship.length == coordinates.length && !overlapped?(coordinates)
       if (consecutive_letters == true) && (same_numbers == true)
         true
       elsif (consecutive_numbers == true) && (same_letters == true)
@@ -112,9 +112,12 @@ class Board
 
   def overlapped?(coordinates)
     coordinates.all? do |coord|
-      @cells[coord].empty?
+      if valid_coordinate?(coord)
+        !@cells[coord].empty?
+      else
+        false
+      end
     end
-
   end
 
   def render(reveal = false)
@@ -127,10 +130,6 @@ class Board
 
 
     "#{row_1}#{row_2}#{row_3}#{row_4}#{row_5}"
-
-
-
-
   end
 
 

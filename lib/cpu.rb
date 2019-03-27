@@ -1,24 +1,20 @@
 class Cpu
-  attr_reader :cpu_board,
-              :player_board,
-              :ships
-  def initialize
-    @cpu_board = Board.new
-    @player_board = Board.new
+  attr_reader :ships,
+              :cpu_board,
+              :player_board
+  def initialize(cpu_board, player_board)
+    @cpu_board = cpu_board
+    @player_board = player_board
     @ships = [Ship.new("Submarine", 2), Ship.new("Cruiser", 3)]
   end
 
   def cpu_place
     coords = []
-
     @ships.each do |ship|
-      loop do
+      while !@cpu_board.valid_placement?(ship, coords)
         coords = @cpu_board.cells.keys.sample(ship.length)
-        if @cpu_board.valid_placement?(ship, coords)
-          @cpu_board.place(ship, coords)
-          break
-        end
       end
+      @cpu_board.place(ship, coords)
     end
   end
 
@@ -31,5 +27,6 @@ class Cpu
         end
     end
   end
+
 
 end
