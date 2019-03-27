@@ -5,6 +5,7 @@ class Game
               :player,
               :cpu,
               :player_shot
+
   def initialize
     @cpu_board = Board.new
     @player_board = Board.new
@@ -32,22 +33,65 @@ class Game
   end
 
   def the_turn
-    puts "=============COMPUTER BOARD============="
-    puts "#{@cpu.cpu_board.render(true)}"
-    puts "==============PLAYER BOARD=============="
-    puts "#{@player.player_board.render(true)}"
-    puts "Enter the coordinate for your shot:\n> "
-    @player_shot = gets.chomp.upcase
-    @player.player_fires(@player_shot)
-    @cpu.cpu_fires
-    puts "Your shot on #{@player_shot} was a #{@cpu.cpu_board.cells[@player_shot].render}"
+    player_hits = 0
+    cpu_hits = 0
+    until player_hits == 5 || cpu_hits == 5
+      puts "=============COMPUTER BOARD============="
+      puts "#{@cpu.cpu_board.render(true)}"
+      puts "==============PLAYER BOARD=============="
+      puts "#{@player.player_board.render(true)}"
+      puts "Enter the coordinate for your shot:\n> "
+      @cpu.cpu_fires
+      @player_shot = gets.chomp.upcase
+      @player.player_fires(@player_shot)
+      puts "My shot on #{@cpu.dat_cell.coordinate} #{computer_place_render}"
+      puts "Your shot on #{@player_shot} #{player_place_render}"
+      if @cpu_board.cells[@player_shot].render == "H"
+        player_hits += 1
+      elsif @player_board.cells[@cpu.dat_cell.coordinate].render == "H"
+        cpu_hits += 1
+      end
+
+      if cpu_hits == 5
+        puts "You lose. Try again? (Type Y to play again)"
+          again = gets.chomp
+        if again.upcase == "Y"
+          start
+        else
+          exit!
+        end
+      elsif player_hits == 5
+        puts "You win! Nice job! Play again? (Type Y to play again)"
+          again = gets.chomp
+        if again.upcase == "Y"
+          start
+        else
+          exit!
+        end
+      end
+    end
   end
 
-  # def player_place_submarinerender
-  #   if @cpu_board.cells[@player_shot].render == "."
-  #
-  # end
+  def player_place_render
+    if @cpu_board.cells[@player_shot].render == "M"
+      "was a miss."
+    elsif @cpu_board.cells[@player_shot].render == "H"
+      "was a hit!"
+    elsif @cpu_board.cells[@player_shot].render == "X"
+      "sunk my ship!!"
+    end
+  end
 
+  def computer_place_render
+    if @player_board.cells[@cpu.dat_cell.coordinate].render == "M"
+      "was a miss."
+    elsif @player_board.cells[@cpu.dat_cell.coordinate].render == "H"
+      "was a hit!"
+    elsif @player_board.cells[@cpu.dat_cell.coordinate].render == "X"
+      "sunk my ship!!"
+    end
+
+  end
 
 
 end

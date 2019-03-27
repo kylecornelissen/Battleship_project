@@ -30,7 +30,7 @@ class Player
       puts "Enter the third coordinate for the Cruiser (3 spaces):\n> "
       cruiser_coord3 = gets.chomp.upcase
       cruiser_coords << cruiser_coord3
-      #binding.pry
+
       if @player_board.valid_placement?(@cruiser, cruiser_coords)
         @player_board.place(@cruiser, cruiser_coords)
         valid = true
@@ -50,7 +50,6 @@ class Player
       puts "Enter the second coordinate for the Submarine (2 spaces):\n> "
       sub_coord2 = gets.chomp.upcase
       sub_coords << sub_coord2
-
       if @player_board.valid_placement?(@submarine, sub_coords)
         @player_board.place(@submarine, sub_coords)
         valid = true
@@ -61,7 +60,6 @@ class Player
   end
 
   def player_fires(player_shot)
-
     @cpu_board.cells[player_shot].fire_upon
   end
 
