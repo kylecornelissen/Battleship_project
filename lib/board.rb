@@ -38,6 +38,7 @@ class Board
     same_letters = same_letters?(letters_to_ordinals)
     same_numbers = same_numbers?(store_numbers)
 
+
     if ship.length == coordinates.length && overlapped?(coordinates)
       if (consecutive_letters == true) && (same_numbers == true)
         true
@@ -125,8 +126,5 @@ class Board
 
     "#{row_1}#{row_2}#{row_3}#{row_4}#{row_5}"
   end
-
-
-
 
 end

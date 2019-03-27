@@ -30,6 +30,7 @@ class Player
       puts "Enter the third coordinate for the Cruiser (3 spaces):\n> "
       cruiser_coord3 = gets.chomp.upcase
       cruiser_coords << cruiser_coord3
+
       if @player_board.valid_placement?(@cruiser, cruiser_coords)
         @player_board.place(@cruiser, cruiser_coords)
         valid = true

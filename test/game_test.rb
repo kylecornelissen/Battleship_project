@@ -34,8 +34,4 @@ class GameTest < Minitest::Test
     expected = "=============COMPUTER BOARD=============" #\n#{@cpu.cpu_board.render}\n==============PLAYER BOARD==============\n#{@player.player_board.render(true)}"
     assert_equal expected, @game.the_turn
   end
-
-
-
-
 end

@@ -3,6 +3,7 @@ class Cpu
               :cpu_board,
               :player_board,
               :dat_cell
+
   def initialize(cpu_board, player_board)
     @cpu_board = cpu_board
     @player_board = player_board

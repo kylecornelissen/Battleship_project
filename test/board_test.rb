@@ -11,9 +11,6 @@ class BoardTest < Minitest::Test
     @board = Board.new
     @cruiser = Ship.new("Cruiser", 3)
     @submarine = Ship.new("submarine", 2)
-    # @ships = [Ship.new("Submarine", 2), Ship.new("Cruiser", 3)]
-    # @cpu_board = Board.new
-    # @player_board = Board.new
   end
 
   def test_if_board_class_exists
@@ -146,8 +143,4 @@ class BoardTest < Minitest::Test
     expected = "  1 2 3 4 \nA X X X . \nB . . . . \nC . . M . \nD . . . . \n"
     assert_equal expected, @board.render(true)
   end
-
-  
-
-
 end

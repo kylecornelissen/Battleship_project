@@ -1,7 +1,7 @@
 require 'minitest/autorun'
 require 'minitest/pride'
 require 'pry'
-require './lib/ship'
+require './lib/ship' 
 
 class ShipTest < Minitest::Test
 
@@ -32,7 +32,6 @@ class ShipTest < Minitest::Test
 
     @cruiser.hit
     assert_equal 1, @cruiser.health
-
     refute @cruiser.sunk?
   end
 
