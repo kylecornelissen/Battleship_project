@@ -34,8 +34,8 @@ class Game
 
   def the_turn
     player_hits = 0
-    computer_hits = 0
-    until player_hits == 5 || computer_hits == 5
+    cpu_hits = 0
+    until player_hits == 5 || cpu_hits == 5
       puts "=============COMPUTER BOARD============="
       puts "#{@cpu.cpu_board.render(true)}"
       puts "==============PLAYER BOARD=============="
@@ -50,6 +50,24 @@ class Game
         player_hits += 1
       elsif @player_board.cells[@cpu.dat_cell.coordinate].render == "H"
         cpu_hits += 1
+      end
+
+      if cpu_hits == 5
+        puts "You lose. Try again? (Type Y to play again)"
+          again = gets.chomp
+        if again.upcase == "Y"
+          start
+        else
+          exit!
+        end
+      elsif player_hits == 5
+        puts "You win! Nice job! Play again? (Type Y to play again)"
+          again = gets.chomp
+        if again.upcase == "Y"
+          start
+        else
+          exit!
+        end
       end
     end
   end

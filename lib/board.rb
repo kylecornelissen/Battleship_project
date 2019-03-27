@@ -38,7 +38,7 @@ class Board
     same_letters = same_letters?(letters_to_ordinals)
     same_numbers = same_numbers?(store_numbers)
 
-    if ship.length == coordinates.length && !overlapped?(coordinates)
+    if ship.length == coordinates.length && overlapped?(coordinates)
       if (consecutive_letters == true) && (same_numbers == true)
         true
       elsif (consecutive_numbers == true) && (same_letters == true)
@@ -111,16 +111,11 @@ class Board
 
   def overlapped?(coordinates)
     coordinates.all? do |coord|
-      if valid_coordinate?(coord)
-        !@cells[coord].empty?
-      else
-        false
-      end
+      valid_coordinate?(coord) && @cells[coord].empty?
     end
   end
 
   def render(reveal = false)
-
     row_1 = "  1 2 3 4 \n"
     row_2 = "A #{@cells["A1"].render(reveal)} #{@cells["A2"].render(reveal)} #{@cells["A3"].render(reveal)} #{@cells["A4"].render(reveal)} \n"
     row_3 = "B #{@cells["B1"].render(reveal)} #{@cells["B2"].render(reveal)} #{@cells["B3"].render(reveal)} #{@cells["B4"].render(reveal)} \n"
