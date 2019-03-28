@@ -20,7 +20,7 @@ class GameTest < Minitest::Test
   end
 
   def test_game_exists
-    skip
+
     assert_instance_of Game, @game
   end
 

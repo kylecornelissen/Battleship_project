@@ -46,8 +46,6 @@ class Cell
     elsif @fired_upon == true && @ship != nil && @ship.sunk? == true
       "X" # SUNK ship fired upon
     end
-
   end
-
 
 end

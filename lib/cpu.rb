@@ -31,5 +31,4 @@ class Cpu
     end
   end
 
-
 end

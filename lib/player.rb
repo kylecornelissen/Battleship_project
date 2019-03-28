@@ -3,6 +3,7 @@ class Player
               :cruiser,
               :cpu_board,
               :player_board
+
   def initialize(cpu_board, player_board)
     @cpu_board = cpu_board
     @player_board = player_board
@@ -61,7 +62,5 @@ class Player
       end
     end
   end
-
-
 
 end

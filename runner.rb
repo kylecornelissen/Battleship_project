@@ -7,5 +7,4 @@ require './lib/cpu'
 require 'pry'
 
 @game = Game.new
-
 @game.welcome_message

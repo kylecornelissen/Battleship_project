@@ -65,6 +65,7 @@ class Game
         end
       end
       system "clear"
+      
       puts "My shot on #{@cpu.dat_cell.coordinate} #{computer_place_render}"
       sleep(1.0)
       puts "Your shot on #{@player_shot} #{player_place_render}"
