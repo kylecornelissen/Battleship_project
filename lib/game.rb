@@ -16,17 +16,26 @@ class Game
   end
 
   def welcome_message
-    puts "Welcome to BATTLESHIP\nEnter p to play. Enter q to quit."
+    system "clear"
+    puts "======Welcome to BATTLESHIP======\nEnter p to play. Enter q to quit."
+    print "🚢⚓️ "
     entry = gets.chomp
-    if entry == "q"
-      puts "Goodbye!"
+    if entry == "p"
+      system "clear"
+      start
+    elsif entry == "q"
+      system "clear"
+      puts "Goodbye! 👋"
       exit!
     else
-      start
+      puts "Can't even handle the easiest task, huh? 😒"
+      sleep(3.0)
+      welcome_message
     end
   end
 
   def start
+    reset
     @cpu.cpu_place
     @player.player_places_ships
     the_turn
@@ -37,37 +46,43 @@ class Game
     cpu_hits = 0
     until player_hits == 5 || cpu_hits == 5
       puts "=============COMPUTER BOARD============="
-      puts "#{@cpu.cpu_board.render(true)}"
+      puts "#{@cpu.cpu_board.render}"
       puts "==============PLAYER BOARD=============="
       puts "#{@player.player_board.render(true)}"
-      puts "Enter the coordinate for your shot:\n> "
+
       @cpu.cpu_fires
-      @player_shot = gets.chomp.upcase
-      @player.player_fires(@player_shot)
+
+      valid = false
+      until valid
+        puts "Enter the coordinate for your shot:\n"
+        print "🚢⚓️ "
+        @player_shot = gets.chomp.upcase
+        if @cpu_board.valid_coordinate?(player_shot) && !@cpu_board.cells[player_shot].fired_upon?
+          @cpu_board.cells[player_shot].fire_upon
+          valid = true
+        else
+          puts "That was an invalid selection. Please try again."
+        end
+      end
+      system "clear"
       puts "My shot on #{@cpu.dat_cell.coordinate} #{computer_place_render}"
+      sleep(1.0)
       puts "Your shot on #{@player_shot} #{player_place_render}"
-      if @cpu_board.cells[@player_shot].render == "H"
+      sleep(2.0)
+      if @cpu_board.cells[@player_shot].render == "X"
         player_hits += 1
-      elsif @player_board.cells[@cpu.dat_cell.coordinate].render == "H"
+      elsif @player_board.cells[@cpu.dat_cell.coordinate].render == "X"
         cpu_hits += 1
       end
 
-      if cpu_hits == 5
-        puts "You lose. Try again? (Type Y to play again)"
-          again = gets.chomp
-        if again.upcase == "Y"
-          start
-        else
-          exit!
-        end
-      elsif player_hits == 5
-        puts "You win! Nice job! Play again? (Type Y to play again)"
-          again = gets.chomp
-        if again.upcase == "Y"
-          start
-        else
-          exit!
-        end
+      if cpu_hits == 2
+        puts "You lose 😳 Holy cow. 😬 How did you lose? 🤭 You are terrible at this."
+        sleep(5.0)
+        welcome_message
+      elsif player_hits == 2
+        puts "You win! Nice job! 🙌"
+        sleep(5.0)
+        welcome_message
       end
     end
   end
@@ -88,10 +103,18 @@ class Game
     elsif @player_board.cells[@cpu.dat_cell.coordinate].render == "H"
       "was a hit!"
     elsif @player_board.cells[@cpu.dat_cell.coordinate].render == "X"
-      "sunk my ship!!"
+      "sunk your ship!!"
     end
-
   end
 
+  def reset
+    @cpu_board = Board.new
+    @player_board = Board.new
+    @player = Player.new(@cpu_board, @player_board)
+    @cpu = Cpu.new(@cpu_board, @player_board)
+    @ships = [Ship.new("Submarine", 2), Ship.new("Cruiser", 3)]
+    @player_shot = nil
+    system "clear"
+  end
 
 end
